@@ -103,9 +103,8 @@ const { createBankDetailSchema, createBankTransactionSchema, generatePayrollSche
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
-const supplementUploadDir = path.join(__dirname, "..", "..", "uploads", "supplements");
-
-fs.mkdirSync(supplementUploadDir, { recursive: true });
+const { getUploadDir } = require("../utils/storage");
+const supplementUploadDir = getUploadDir("supplements");
 
 const supplementStorage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, supplementUploadDir),

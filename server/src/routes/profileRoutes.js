@@ -6,9 +6,8 @@ const { updateMyProfile, updateMyWorkoutProgress, markNotificationsRead } = requ
 const { requireAuth } = require("../middleware/auth");
 
 const router = express.Router();
-const uploadDir = path.join(__dirname, "..", "..", "uploads", "profile-images");
-
-fs.mkdirSync(uploadDir, { recursive: true });
+const { getUploadDir } = require("../utils/storage");
+const uploadDir = getUploadDir("profile-images");
 
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, uploadDir),

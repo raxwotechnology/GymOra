@@ -68,8 +68,8 @@ const router = express.Router();
 router.use(requireAuth, allowRoles("super-admin"));
 
 // Gym logo upload setup
-const gymLogoDir = path.join(__dirname, "..", "..", "uploads", "gyms");
-fs.mkdirSync(gymLogoDir, { recursive: true });
+const { getUploadDir } = require("../utils/storage");
+const gymLogoDir = getUploadDir("gyms");
 
 const logoStorage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, gymLogoDir),
@@ -89,8 +89,7 @@ const logoUpload = multer({
 });
 
 // System assets upload (logo, hero image)
-const systemUploadDir = path.join(__dirname, "..", "..", "uploads", "system");
-fs.mkdirSync(systemUploadDir, { recursive: true });
+const systemUploadDir = getUploadDir("system");
 
 const systemStorage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, systemUploadDir),
