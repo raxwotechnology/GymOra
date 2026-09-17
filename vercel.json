@@ -1,5 +1,5 @@
-﻿{
-  "version": 2,
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
   "rewrites": [
@@ -17,3 +17,4 @@
     }
   ]
 }
+
