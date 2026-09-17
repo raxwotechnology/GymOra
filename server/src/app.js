@@ -46,13 +46,19 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use(async (_req, _res, next) => {
+app.use(async (req, res, next) => {
   try {
     await connectDB();
     next();
   } catch (err) {
     console.error("[mongodb] Connection error:", err.message);
-    next();
+    if (req.path === "/settings" || req.path === "/api/settings" || req.path === "/health" || req.path === "/api/health") {
+      return next();
+    }
+    return res.status(503).json({
+      error: "Database Connection Failed",
+      message: err.message || "Failed to connect to MongoDB Atlas. Ensure 0.0.0.0/0 is whitelisted in MongoDB Atlas Network Access and MONGO_URI is set in Vercel."
+    });
   }
 });
 
