@@ -1,0 +1,40 @@
+{
+  "name": "fitnesshub-server",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "seed:admin": "node src/data/bootstrapSuperAdmin.js",
+    "seed:db": "node src/data/seedDatabase.js",
+    "seed:new": "node src/data/seedNewData.js",
+    "seed:missing": "node src/data/seedMissingData.js",
+    "seed:attendance": "node src/data/seedCoachAttendance.js",
+    "seed:payroll": "node src/data/seedPayroll.js",
+    "seed:backfill": "node src/data/backfillDemoDetails.js",
+    "seed:repair": "node src/data/repairAccountProfiles.js",
+    "seed:suppliers": "node src/data/seedSuppliers.js",
+    "seed:trials": "node src/data/seedTrials.js",
+    "banks:recompute": "node src/scripts/recomputeBankBalances.js",
+    "banks:recompute:dry": "node src/scripts/recomputeBankBalances.js --dry-run",
+    "seed:all": "node src/data/bootstrapSuperAdmin.js && node src/data/seedDatabase.js && node src/data/seedNewData.js && node src/data/seedMissingData.js && node src/data/seedCoachAttendance.js && node src/data/seedPayroll.js && node src/data/backfillDemoDetails.js && node src/data/repairAccountProfiles.js && node src/data/seedSuppliers.js && node src/data/seedTrials.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.15.0",
+    "multer": "^2.1.1",
+    "node-cron": "^4.4.1",
+    "nodemailer": "^8.0.7",
+    "socket.io": "^4.8.3",
+    "xlsx": "^0.18.5",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

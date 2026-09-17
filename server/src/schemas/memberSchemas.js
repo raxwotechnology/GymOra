@@ -1,0 +1,65 @@
+const { z } = require("zod");
+
+const createMemberSchema = z.object({
+  gymId: z.string().min(1, "Gym is required"),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  plan: z.string().min(1, "Plan is required"),
+  goal: z.string().min(1, "Goal is required"),
+  phone: z.string().optional(),
+  coach: z.string().optional(),
+  durationMonths: z.number().int().min(1).optional(),
+  amountPaid: z.number().min(0).optional(),
+  amountDue: z.number().min(0).optional(),
+  paymentMethod: z.string().optional(),
+  joinedAt: z.string().optional(),
+  planStartedAt: z.string().optional(),
+  heightCm: z.number().min(0).optional(),
+  currentWeightKg: z.number().min(0).optional(),
+  targetWeightKg: z.number().min(0).optional(),
+  targetBodyFat: z.number().min(0).optional(),
+  chestCm: z.number().min(0).optional(),
+  waistCm: z.number().min(0).optional(),
+  armsCm: z.number().min(0).optional(),
+  thighsCm: z.number().min(0).optional(),
+  personalNotes: z.string().optional(),
+  goalTargetDate: z.string().optional(),
+});
+
+const updateMemberSchema = z.object({
+  name: z.string().min(1).optional(),
+  email: z.string().email().optional(),
+  phone: z.string().optional(),
+  plan: z.string().optional(),
+  goal: z.string().optional(),
+  coach: z.string().optional(),
+  durationMonths: z.number().int().min(1).optional(),
+  paymentMethod: z.string().optional(),
+  supplementUsage: z.string().optional(),
+  membershipFreezeStatus: z.string().optional(),
+  goalTargetDate: z.string().optional(),
+  currentWeightKg: z.number().min(0).optional(),
+  targetWeightKg: z.number().min(0).optional(),
+  targetBodyFat: z.number().min(0).optional(),
+  personalNotes: z.string().optional(),
+  chestCm: z.number().min(0).optional(),
+  waistCm: z.number().min(0).optional(),
+  armsCm: z.number().min(0).optional(),
+  thighsCm: z.number().min(0).optional(),
+});
+
+const updateMemberSubscriptionSchema = z.object({
+  plan: z.string().optional(),
+  durationMonths: z.number().int().min(1).optional(),
+  amountPaid: z.number().min(0).optional(),
+  amountDue: z.number().min(0).optional(),
+  dietPlanName: z.string().optional(),
+  planStartedAt: z.string().optional(),
+  paymentMethod: z.string().optional(),
+  note: z.string().optional(),
+  chequeNumber: z.string().optional(),
+  bankName: z.string().optional(),
+  referenceNumber: z.string().optional(),
+});
+
+module.exports = { createMemberSchema, updateMemberSchema, updateMemberSubscriptionSchema };
