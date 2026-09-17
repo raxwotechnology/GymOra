@@ -6,6 +6,7 @@ async function connectDB() {
   const mongoUri = process.env.MONGO_URI;
 
   if (!mongoUri) {
+    console.error("[mongodb] MONGO_URI environment variable is missing!");
     throw new Error("MONGO_URI is not set");
   }
 
@@ -15,10 +16,15 @@ async function connectDB() {
 
   if (!cachedPromise) {
     cachedPromise = mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 8000,
+      connectTimeoutMS: 10000,
     }).then((m) => {
       console.log("[mongodb] Connected successfully");
       return m;
+    }).catch((err) => {
+      console.error("[mongodb] Connection failed:", err.message);
+      cachedPromise = null;
+      throw err;
     });
   }
 
@@ -26,3 +32,4 @@ async function connectDB() {
 }
 
 module.exports = connectDB;
+

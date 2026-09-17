@@ -1,4 +1,4 @@
-﻿const express = require("express");
+const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
@@ -74,4 +74,15 @@ app.get("/", (_req, res) => {
   res.json({ message: "Gymora API is running" });
 });
 
+// Global Error Handler
+app.use((err, _req, res, _next) => {
+  console.error("[Unhandled Error]:", err);
+  const statusCode = err.status || err.statusCode || 500;
+  res.status(statusCode).json({
+    message: err.message || "Internal Server Error",
+    error: process.env.NODE_ENV === "development" ? err.stack : undefined
+  });
+});
+
 module.exports = app;
+
