@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+mongoose.set("bufferCommands", false);
+
 let cachedPromise = null;
 
 async function connectDB() {
@@ -16,8 +18,8 @@ async function connectDB() {
 
   if (!cachedPromise) {
     cachedPromise = mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 8000,
-      connectTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
     }).then((m) => {
       console.log("[mongodb] Connected successfully");
       return m;
@@ -32,4 +34,5 @@ async function connectDB() {
 }
 
 module.exports = connectDB;
+
 
