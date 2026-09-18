@@ -689,19 +689,19 @@ export default function CoachDash() {
       page={page}
       setPage={setPage}
       sidebar={coach ? (
-        <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 12 }}>
-          <div style={{ padding: "14px 16px", borderRadius: 18, background: `linear-gradient(135deg, ${coachAccentSoft}, #ffffff 70%)`, border: `1px solid ${coachAccent}24` }}>
-            <div style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-0.03em", color: "#0f172a", lineHeight: 1.25 }}>
+        <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ padding: "12px 14px", borderRadius: "var(--radius-md)", background: `linear-gradient(135deg, ${coachAccentSoft}, #ffffff 70%)`, border: `1px solid ${coachAccent}24` }}>
+            <div style={{ fontSize: "var(--fs-sm)", fontWeight: "var(--fw-bold)", color: "#0f172a", lineHeight: 1.3 }}>
               {profile?.gymName || "Gym not assigned"}
             </div>
-            <div style={{ marginTop: 6, fontSize: 10, color: "#64748b", letterSpacing: "0.08em", textTransform: "uppercase" }}>Powered by Gymora</div>
+            <div style={{ marginTop: 4, fontSize: "var(--fs-xs)", color: "var(--muted)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Powered by Gymora</div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <Avatar initials={coach.avatar} size={42} imageUrl={profile?.profileImageUrl || ""} />
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <Avatar initials={coach.avatar} size={36} imageUrl={profile?.profileImageUrl || ""} />
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text)" }}>{coach.name}</div>
-              <div style={{ fontSize: 11, color: "var(--muted)" }}>{coach.specialty}</div>
-              <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 6 }}>{members.length} active members</div>
+              <div style={{ fontSize: "var(--fs-sm)", fontWeight: "var(--fw-semibold)", color: "var(--text)" }}>{coach.name}</div>
+              <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)" }}>{coach.specialty}</div>
+              <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", marginTop: 2 }}>{members.length} active members</div>
             </div>
           </div>
         </div>
@@ -718,7 +718,7 @@ export default function CoachDash() {
       {!hasCoachData && (
         <EmptyState
           title="No coach data yet"
-          message="This coach login works, but there is no real coach profile or assigned gym data in the database yet. Add a gym and coach record first to start using this dashboard with real data."
+          message="Your account is active, but your coach profile is not linked to any active gym records yet. Contact your gym owner to make sure your coach profile is set up."
         />
       )}
 
@@ -737,9 +737,9 @@ export default function CoachDash() {
                   <div style={{ padding: 22, background: `linear-gradient(135deg, ${coachAccentSoft}, #ffffff 68%)`, borderBottom: "1px solid var(--border)" }}>
                     <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 16 }}>
                       <div>
-                        <div style={{ fontSize: 11, color: "#15803d", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 800 }}>Coach Overview</div>
-                        <div style={{ marginTop: 8, fontSize: isMobile ? 24 : 30, fontWeight: 900, letterSpacing: "-0.05em", color: "#0f172a" }}>{coach?.name || "Coach"}</div>
-                        <div style={{ marginTop: 8, fontSize: 14, color: "#475569", lineHeight: 1.6, maxWidth: 520 }}>
+                        <div style={{ fontSize: "var(--fs-xs)", color: "#15803d", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: "var(--fw-semibold)" }}>Coach Overview</div>
+                        <div style={{ marginTop: 6, fontSize: isMobile ? "var(--fs-xl)" : "var(--fs-2xl)", fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{coach?.name || "Coach"}</div>
+                        <div style={{ marginTop: 8, fontSize: "var(--fs-sm)", color: "var(--muted)", lineHeight: 1.6, maxWidth: 520 }}>
                           Keep members progressing, assign plans faster, and stay on top of attendance and message follow-ups from one workspace.
                         </div>
                       </div>

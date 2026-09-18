@@ -1005,14 +1005,14 @@ export default function SuperAdminDash() {
           >
             <div style={{ ...responsiveGrid(isMobile, "1.45fr 1fr"), gap: 18, alignItems: "center" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                <div style={{ display: "inline-flex", alignItems: "center", alignSelf: "flex-start", minHeight: 26, padding: "0 12px", borderRadius: 999, background: "#dbeafe", color: "#1d4ed8", fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", alignSelf: "flex-start", minHeight: 26, padding: "0 12px", borderRadius: "var(--radius-full)", background: "#dbeafe", color: "#1d4ed8", fontSize: "var(--fs-xs)", fontWeight: "var(--fw-semibold)", letterSpacing: "0.05em", textTransform: "uppercase" }}>
                   Platform Command Center
                 </div>
                 <div>
-                  <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 800, color: "#0f172a", letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+                  <div style={{ fontSize: isMobile ? "var(--fs-xl)" : "var(--fs-2xl)", fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1.2 }}>
                     Watch growth, trials, and platform risk from one place.
                   </div>
-                  <div style={{ marginTop: 10, fontSize: 14, color: "#475569", maxWidth: 620, lineHeight: 1.7 }}>
+                  <div style={{ marginTop: 8, fontSize: "var(--fs-sm)", color: "var(--muted)", maxWidth: 620, lineHeight: 1.6 }}>
                     You currently have {gyms.length} gyms on the platform, {trialGyms.length} in trial, and {notifications.length} active alerts needing follow-up.
                   </div>
                 </div>

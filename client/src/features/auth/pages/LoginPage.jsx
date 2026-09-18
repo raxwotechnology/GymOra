@@ -145,7 +145,7 @@ export default function LoginPage() {
                 type="email"
                 value={loginForm.email}
                 onChange={(e) => setLoginForm((prev) => ({ ...prev, email: e.target.value }))}
-                placeholder="member@fitnesshub.com"
+                placeholder="you@yourgym.com"
                 required
               />
             </div>
@@ -192,18 +192,11 @@ export default function LoginPage() {
           </div>
           <footer className="login-page-footer">
             <div className="login-footer-links">
-              {privacyPolicy
-                ? <a href="#privacy" onClick={(e) => { e.preventDefault(); window.open("", "_blank"); alert(privacyPolicy); }}>Privacy Policy</a>
-                : <span>Privacy Policy</span>
-              }
-              {termsOfUse
-                ? <a href="#terms" onClick={(e) => { e.preventDefault(); alert(termsOfUse); }}>Terms of Use</a>
-                : <span>Terms of Use</span>
-              }
-              {helpCenter
-                ? <a href="#help" onClick={(e) => { e.preventDefault(); alert(helpCenter); }}>Help Center</a>
-                : <span>Help Center</span>
-              }
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms of Use</Link>
+              {helpCenter ? (
+                <a href="#help" onClick={(e) => { e.preventDefault(); alert(helpCenter); }}>Help Center</a>
+              ) : null}
               <Link to="/get-started">Register your gym</Link>
             </div>
           </footer>

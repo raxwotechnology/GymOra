@@ -5,6 +5,7 @@ export function roleToPath(role) {
     case "owner":
       return "/owner";
     case "coach":
+    case "staff":
       return "/coach";
     case "member":
       return "/member";
@@ -12,3 +13,4 @@ export function roleToPath(role) {
       return "/login";
   }
 }
+

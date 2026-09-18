@@ -22,11 +22,11 @@ export function WorkoutPlanCard({ plan, onAssign, onEdit, onDelete }) {
       <div style={{ padding: 18, background: "linear-gradient(135deg, #fff6e8, #ffffff 60%)", borderBottom: "1px solid var(--border)" }}>
         <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 10px", borderRadius: 999, background: `${badgeTone}14`, color: badgeTone, fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 10px", borderRadius: "var(--radius-full)", background: `${badgeTone}14`, color: badgeTone, fontSize: "var(--fs-xs)", fontWeight: "var(--fw-semibold)", letterSpacing: "0.05em", textTransform: "uppercase" }}>
               {plan.level}
             </div>
-            <div style={{ marginTop: 12, fontSize: 21, fontWeight: 800, letterSpacing: "-0.03em", color: "#111827" }}>{plan.name}</div>
-            <div style={{ marginTop: 6, fontSize: 13, color: "#475569", lineHeight: 1.6 }}>{plan.category} focused routine built for {plan.duration}.</div>
+            <div style={{ marginTop: 10, fontSize: "var(--fs-lg)", fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{plan.name}</div>
+            <div style={{ marginTop: 6, fontSize: "var(--fs-sm)", color: "var(--muted)", lineHeight: 1.6 }}>{plan.category} focused routine built for {plan.duration}.</div>
           </div>
           <div style={{ display: "flex", gap: 6, width: isMobile ? "100%" : "auto" }}>
             <IconBtn title="Assign to Member" onClick={onAssign}><IcoAssign /></IconBtn>
@@ -53,11 +53,11 @@ export function MealPlanCard({ plan, onAssign, onEdit, onDelete }) {
       <div style={{ padding: 18, background: "linear-gradient(135deg, #eefbf1, #ffffff 62%)", borderBottom: "1px solid var(--border)" }}>
         <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 10px", borderRadius: 999, background: "rgba(22, 163, 74, 0.12)", color: "#15803d", fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 10px", borderRadius: "var(--radius-full)", background: "rgba(22, 163, 74, 0.12)", color: "#15803d", fontSize: "var(--fs-xs)", fontWeight: "var(--fw-semibold)", letterSpacing: "0.05em", textTransform: "uppercase" }}>
               {plan.goal}
             </div>
-            <div style={{ marginTop: 12, fontSize: 21, fontWeight: 800, letterSpacing: "-0.03em", color: "#111827" }}>{plan.name}</div>
-            <div style={{ marginTop: 6, fontSize: 13, color: "#475569", lineHeight: 1.6 }}>
+            <div style={{ marginTop: 10, fontSize: "var(--fs-lg)", fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{plan.name}</div>
+            <div style={{ marginTop: 6, fontSize: "var(--fs-sm)", color: "var(--muted)", lineHeight: 1.6 }}>
               Structured for consistency with real foods and clear meal timing.
             </div>
           </div>

@@ -91,14 +91,14 @@ export function DashboardShell({ accent, title, subtitle, logoUrl, navItems, pag
   }, []);
   const useNavGroups = groupedNavItems.length > 1 || groupedNavItems.some((group) => group.label !== "Workspace");
 
-  const navBg         = "linear-gradient(180deg, #ffffff, #f8fafc)";
-  const navText       = "#64748b";
+  const navBg         = "#ffffff";
+  const navText       = "var(--muted)";
   const navActiveText = accent;
-  const navActiveBg   = `linear-gradient(135deg, ${accent}22, ${accent}12)`;
-  const navHoverBg    = "#f1f5f9";
-  const navGroupLabel = "#94a3b8";
-  const sidebarBorder = "1px solid rgba(148,163,184,0.18)";
-  const sidebarShadow = "10px 0 30px rgba(15,23,42,0.04)";
+  const navActiveBg   = `linear-gradient(135deg, ${accent}18, ${accent}0c)`;
+  const navHoverBg    = "var(--border-light)";
+  const navGroupLabel = "var(--muted-light)";
+  const sidebarBorder = "1px solid var(--border)";
+  const sidebarShadow = "2px 0 16px rgba(15,23,42,0.04)";
 
   function renderNavButton(item) {
     const isActive = page === item.id;
@@ -108,26 +108,34 @@ export function DashboardShell({ accent, title, subtitle, logoUrl, navItems, pag
         onClick={() => { setPage(item.id); setDrawerOpen(false); }}
         style={{
           display: "flex", alignItems: "center", justifyContent: "flex-start",
-          gap: 10, padding: "10px 12px", borderRadius: 10, border: "none",
-          whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer", textAlign: "left",
-          fontSize: 13, fontWeight: isActive ? 700 : 500, fontFamily: "var(--font)",
+          gap: "var(--space-sm)", padding: "9px 12px", borderRadius: "var(--radius-sm)",
+          border: "none", whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer",
+          textAlign: "left",
+          fontSize: "var(--fs-sm)",
+          fontWeight: isActive ? "var(--fw-semibold)" : "var(--fw-medium)",
+          fontFamily: "var(--font)",
           width: "100%", position: "relative",
           background: isActive ? navActiveBg : "transparent",
           color: isActive ? navActiveText : navText,
           transition: "background 0.15s, color 0.15s",
-          boxShadow: isActive ? `inset 0 0 0 1px ${accent}22` : "none"
+          boxShadow: isActive ? `inset 0 0 0 1px ${accent}20` : "none"
         }}
         onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = navHoverBg; }}
         onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = "transparent"; }}
       >
-        <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: 999, flexShrink: 0, background: isActive ? accent : "#cbd5e1", boxShadow: isActive ? `0 0 0 5px ${accent}14` : "none", transition: "all 0.2s ease" }} />
+        <span aria-hidden="true" style={{
+          width: 7, height: 7, borderRadius: "var(--radius-full)", flexShrink: 0,
+          background: isActive ? accent : "#cbd5e1",
+          boxShadow: isActive ? `0 0 0 4px ${accent}18` : "none",
+          transition: "all 0.2s ease"
+        }} />
         <span style={{ flex: 1 }}>{item.label}</span>
         {item.count > 0 ? (
           <span style={{
-            minWidth: 20, height: 20, padding: "0 6px", borderRadius: 999,
+            minWidth: 18, height: 18, padding: "0 5px", borderRadius: "var(--radius-full)",
             display: "inline-flex", alignItems: "center", justifyContent: "center",
-            background: isActive ? accent : "#e2e8f0", color: isActive ? "#ffffff" : "#475569",
-            fontSize: 10, fontWeight: 800, lineHeight: 1
+            background: isActive ? accent : "#e2e8f0", color: isActive ? "#ffffff" : "var(--muted)",
+            fontSize: "var(--fs-xs)", fontWeight: "var(--fw-bold)", lineHeight: 1
           }}>
             {item.count > 99 ? "99+" : item.count}
           </span>
@@ -142,29 +150,56 @@ export function DashboardShell({ accent, title, subtitle, logoUrl, navItems, pag
   const sidebarContent = (
     <>
       {/* Brand block */}
-      <div style={{ padding: "8px 8px 0px", borderBottom: "1px solid var(--border)", flexShrink: 0 }}>
+      <div style={{ padding: "12px 10px 8px", borderBottom: "1px solid var(--border)", flexShrink: 0 }}>
         {logoUrl ? (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: "100%", height: 120, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src={logoUrl} alt={title} style={{ width: "100%", height: "100%", objectFit: "contain", transform: "scale(1.7)", transformOrigin: "center center", display: "block" }} />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6px 0" }}>
+            <div style={{ width: "100%", minHeight: 52, maxHeight: 64, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img
+                src={logoUrl} alt={title}
+                style={{ maxWidth: "100%", maxHeight: 60, width: "auto", height: "auto", objectFit: "contain", display: "block" }}
+              />
             </div>
-            <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 2, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.14em" }}>{subtitle}</div>
+            {subtitle && (
+              <div style={{
+                fontSize: "var(--fs-xs)", color: "var(--muted-light)",
+                marginTop: 4, marginBottom: 2,
+                textTransform: "uppercase", letterSpacing: "0.12em",
+                fontWeight: "var(--fw-medium)"
+              }}>{subtitle}</div>
+            )}
           </div>
         ) : (
-          <div style={{ padding: 18, borderRadius: 24, background: `linear-gradient(135deg, ${accent}14, rgba(255,255,255,0.95))`, border: `1px solid ${accent}18` }}>
-            <div style={{ fontSize: 24, fontWeight: 900, letterSpacing: "-0.04em", color: accent }}>{title}</div>
-            <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 4, textTransform: "uppercase", letterSpacing: "0.12em" }}>{subtitle}</div>
+          <div style={{
+            padding: "14px 16px", borderRadius: "var(--radius-xl)",
+            background: `linear-gradient(135deg, ${accent}10, rgba(255,255,255,0.95))`,
+            border: `1px solid ${accent}18`
+          }}>
+            <div style={{
+              fontSize: "var(--fs-xl)", fontWeight: "var(--fw-black)",
+              letterSpacing: "-0.04em", color: accent, lineHeight: 1.1
+            }}>{title}</div>
+            {subtitle && (
+              <div style={{
+                fontSize: "var(--fs-xs)", color: "var(--muted)",
+                marginTop: 4, textTransform: "uppercase", letterSpacing: "0.12em",
+                fontWeight: "var(--fw-medium)"
+              }}>{subtitle}</div>
+            )}
           </div>
         )}
-        {sidebar && <div style={{ paddingBottom: 10 }}>{sidebar}</div>}
+        {sidebar && <div style={{ paddingTop: 10 }}>{sidebar}</div>}
       </div>
 
       {/* Nav */}
-      <nav style={{ flex: 1, padding: "10px 10px 16px", display: "flex", flexDirection: "column", gap: 2, overflowY: "auto", scrollbarWidth: "none" }}>
+      <nav style={{ flex: 1, padding: "8px 8px 16px", display: "flex", flexDirection: "column", gap: 2, overflowY: "auto", scrollbarWidth: "none" }}>
         {(useNavGroups ? groupedNavItems : [{ label: "", items: visibleNavItems }]).map((group) => (
-          <div key={group.label} style={{ display: "flex", flexDirection: "column", gap: 1, marginBottom: group.label ? 8 : 0 }}>
+          <div key={group.label} style={{ display: "flex", flexDirection: "column", gap: 1, marginBottom: group.label ? 6 : 0 }}>
             {group.label ? (
-              <div style={{ padding: "10px 12px 4px", fontSize: 10, fontWeight: 800, color: navGroupLabel, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+              <div style={{
+                padding: "8px 12px 3px",
+                fontSize: "var(--fs-xs)", fontWeight: "var(--fw-heavy)",
+                color: navGroupLabel, letterSpacing: "0.12em", textTransform: "uppercase"
+              }}>
                 {group.label}
               </div>
             ) : null}
@@ -174,6 +209,7 @@ export function DashboardShell({ accent, title, subtitle, logoUrl, navItems, pag
       </nav>
     </>
   );
+
 
   return (
     <div style={{ display: "flex", flexDirection: "row", height: "100vh", overflow: "hidden", background: "var(--bg)", fontFamily: "var(--font)" }}>
@@ -230,11 +266,15 @@ export function DashboardShell({ accent, title, subtitle, logoUrl, navItems, pag
               </button>
             )}
             <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", letterSpacing: "-0.01em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              <div style={{
+                fontSize: "var(--fs-md)", fontWeight: "var(--fw-semibold)",
+                color: "var(--text)", letterSpacing: "-0.01em",
+                whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
+              }}>
                 {currentNavItem?.label}
               </div>
               {currentNavItem?.description && !isMobile && (
-                <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 1 }}>{currentNavItem.description}</div>
+                <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", marginTop: 1 }}>{currentNavItem.description}</div>
               )}
             </div>
           </div>
@@ -242,10 +282,11 @@ export function DashboardShell({ accent, title, subtitle, logoUrl, navItems, pag
         </div>
 
         {/* Page content */}
-        <div style={{ flex: 1, overflow: "auto", padding: isMobile ? 12 : 28, background: "var(--bg)" }}>
+        <div style={{ flex: 1, overflow: "auto", padding: isMobile ? "var(--space-md)" : "var(--space-xl)", background: "var(--bg)" }}>
           {children}
         </div>
       </div>
+
 
       <style>{`
         @keyframes slideInLeft {

@@ -14,6 +14,8 @@ const OwnerDashboard = lazy(() => import("../../features/dashboard/owner/pages/O
 const CoachDashboard = lazy(() => import("../../features/dashboard/coach/pages/CoachDashboard"));
 const MemberDashboard = lazy(() => import("../../features/dashboard/member/pages/MemberDashboard"));
 const GetStartedPage = lazy(() => import("../../features/register/pages/GetStartedPage"));
+const TermsPage = lazy(() => import("../../features/system/pages/TermsPage"));
+const PrivacyPage = lazy(() => import("../../features/system/pages/PrivacyPage"));
 
 function HomeRedirect() {
   const { user } = useAuth();
@@ -28,10 +30,13 @@ export default function AppRoutes() {
       <Route path="/login" element={<RouteErrorBoundary><LoginPage /></RouteErrorBoundary>} />
       <Route path="/forgot-password" element={<RouteErrorBoundary><ForgotPasswordPage /></RouteErrorBoundary>} />
       <Route path="/get-started" element={<RouteErrorBoundary><GetStartedPage /></RouteErrorBoundary>} />
+      <Route path="/terms" element={<RouteErrorBoundary><TermsPage /></RouteErrorBoundary>} />
+      <Route path="/privacy" element={<RouteErrorBoundary><PrivacyPage /></RouteErrorBoundary>} />
+      <Route path="/staff" element={<Navigate to="/coach" replace />} />
       <Route
         path="/change-password"
         element={(
-          <ProtectedRoute allowedRoles={["super-admin", "owner", "coach", "member"]}>
+          <ProtectedRoute allowedRoles={["super-admin", "owner", "coach", "member", "staff"]}>
             <RouteErrorBoundary>
               <ChangePasswordPage />
             </RouteErrorBoundary>
@@ -63,7 +68,7 @@ export default function AppRoutes() {
         <Route
           path="/coach"
           element={(
-            <ProtectedRoute allowedRoles={["coach"]}>
+            <ProtectedRoute allowedRoles={["coach", "staff"]}>
               <RouteErrorBoundary>
                 <CoachDashboard />
               </RouteErrorBoundary>

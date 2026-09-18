@@ -37,7 +37,7 @@ async function getDashboard(req, res) {
   const gymId = user.gym;
   if (!gymId) {
     if (role === "owner") return res.json(emptyOwnerDashboard());
-    if (role === "coach") return res.json(emptyCoachDashboard());
+    if (role === "coach" || role === "staff") return res.json(emptyCoachDashboard());
     if (role === "member") return res.json(emptyMemberDashboard());
     return res.status(400).json({ message: "User is not assigned to a gym" });
   }
@@ -95,7 +95,7 @@ async function getDashboard(req, res) {
   const sharedData = { gym, coaches: coachesWithImages, members: membersWithImages, plans, equipment, announcements, workoutPlans, mealPlans, messages, attendance, expenses, supplements, sales, returns, pendingUsers, auditLogs, memberImageByMemberId, userImageById, userById, user, subscriptionPlans };
 
   if (role === "owner") return handleOwner(req, res, sharedData);
-  if (role === "coach") return handleCoach(req, res, sharedData);
+  if (role === "coach" || role === "staff") return handleCoach(req, res, sharedData);
   if (role === "member") return handleMember(req, res, sharedData);
 
   return res.status(400).json({ message: "Unsupported role" });

@@ -2924,12 +2924,12 @@ export default function GymOwnerDash() {
       page={page}
       setPage={setPage}
       sidebar={(
-        <div style={{ marginTop: 14, padding: "12px", background: "#eff6ff", borderRadius: 14, display: "flex", alignItems: "center", gap: 12 }}>
-          <Avatar initials={profile?.name?.slice(0, 2).toUpperCase() || "OW"} size={42} imageUrl={profile?.profileImageUrl || ""} />
+        <div style={{ marginTop: 12, padding: "10px 12px", background: "var(--border-light)", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: 10 }}>
+          <Avatar initials={profile?.name?.slice(0, 2).toUpperCase() || "OW"} size={36} imageUrl={profile?.profileImageUrl || ""} />
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#1e40af" }}>{profile?.name || "Gym Owner"}</div>
-            <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 4 }}>{currentGym.name}</div>
-            <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 4 }}>{currentGym.stats.totalMembers} members | {currentGym.stats.coaches} coaches</div>
+            <div style={{ fontSize: "var(--fs-sm)", fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{profile?.name || "Gym Owner"}</div>
+            <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", marginTop: 2 }}>{currentGym.name}</div>
+            <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", marginTop: 2 }}>{currentGym.stats.totalMembers} members | {currentGym.stats.coaches} coaches</div>
           </div>
         </div>
       )}
@@ -2963,11 +2963,11 @@ export default function GymOwnerDash() {
                   <div style={{ padding: isMobile ? 18 : 24, background: "linear-gradient(135deg, #dbeafe, #ffffff 58%)", borderBottom: "1px solid var(--border)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center" }}>
                       <div>
-                        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 10px", borderRadius: 999, background: "rgba(37, 99, 235, 0.12)", color: "#1d4ed8", fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "5px 10px", borderRadius: "var(--radius-full)", background: "rgba(37, 99, 235, 0.12)", color: "#1d4ed8", fontSize: "var(--fs-xs)", fontWeight: "var(--fw-semibold)", letterSpacing: "0.05em", textTransform: "uppercase" }}>
                           Performance Pulse
                         </div>
-                        <div style={{ marginTop: 12, fontSize: isMobile ? 24 : 30, fontWeight: 900, letterSpacing: "-0.04em", color: "#0f172a" }}>{currentGym.name}</div>
-                        <div style={{ marginTop: 8, fontSize: 14, color: "#475569", lineHeight: 1.7 }}>
+                        <div style={{ marginTop: 10, fontSize: isMobile ? "var(--fs-xl)" : "var(--fs-2xl)", fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{currentGym.name}</div>
+                        <div style={{ marginTop: 6, fontSize: "var(--fs-sm)", color: "var(--muted)", lineHeight: 1.6 }}>
                           A denser operating view for membership health, attendance movement, and revenue momentum.
                         </div>
                       </div>

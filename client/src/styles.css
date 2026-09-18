@@ -1,15 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 
 :root {
+  /* ── Colors ── */
   --bg: #f5f6fa;
   --surface: #ffffff;
   --surface2: #eef0f6;
   --accent: #2563eb;
-  --text: #111827;
-  --muted: #6b7280;
-  --border: #e5e7eb;
+  --text: #0f172a;
+  --text-secondary: #334155;
+  --muted: #64748b;
+  --muted-light: #94a3b8;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
   --font: "Poppins", sans-serif;
+
+  /* ── Typography Scale ── */
+  --fs-xs:  11px;   /* labels, meta, badges */
+  --fs-sm:  13px;   /* body text, nav items, table rows */
+  --fs-md:  14px;   /* standard text, button text */
+  --fs-lg:  16px;   /* subheadings, sidebar titles */
+  --fs-xl:  20px;   /* section headings */
+  --fs-2xl: 24px;   /* page headings */
+  --fs-3xl: 30px;   /* hero/stat numbers */
+
+  /* ── Font Weights ── */
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-heavy:    800;
+  --fw-black:    900;
+
+  /* ── Border Radius ── */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Spacing ── */
+  --space-xs:  6px;
+  --space-sm:  10px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-md: 0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04);
+  --shadow-lg: 0 12px 32px rgba(15,23,42,0.10), 0 4px 8px rgba(15,23,42,0.06);
 }
+
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: inherit; }
 html, body, #root { height: 100%; }
@@ -98,14 +142,14 @@ input, button, select, textarea { font: inherit; }
 .login-badge {
   display: inline-flex;
   align-self: flex-start;
-  padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #f8fafc;
 }
@@ -130,10 +174,11 @@ input, button, select, textarea { font: inherit; }
 
 .login-hero h1 {
   margin-top: 22px;
-  max-width: 420px;
-  font-size: 44px;
-  line-height: 1.0;
-  letter-spacing: -0.04em;
+  max-width: 440px;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: var(--fw-bold);
   color: #f8fafc;
 }
 
@@ -268,14 +313,13 @@ input, button, select, textarea { font: inherit; }
 }
 
 .login-brand-header {
-  margin: -48px -52px -20px;
-  padding: 0 32px;
-  background: #ffffff;
+  margin: 0 0 24px 0;
+  padding: 0;
+  background: transparent;
   border-bottom: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 0;
 }
 
 .login-brand-icon {
@@ -292,9 +336,9 @@ input, button, select, textarea { font: inherit; }
 }
 
 .login-brand-name {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
   color: #0f172a;
 }
 
@@ -309,26 +353,27 @@ input, button, select, textarea { font: inherit; }
 }
 
 .login-card h2 {
-  font-size: 32px;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin-bottom: 8px;
-  color: #111827;
+  color: #0f172a;
+  font-weight: var(--fw-bold);
 }
 
 .login-card p {
-  color: #334155;
-  font-size: 14px;
+  color: var(--muted);
+  font-size: var(--fs-sm);
   line-height: 1.6;
 }
 
 .login-field {
   display: grid;
-  gap: 12px;
+  gap: 8px;
 }
 
 .login-card-header {
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .login-label-row {
@@ -338,25 +383,25 @@ input, button, select, textarea { font: inherit; }
 }
 
 .login-card label {
-  font-size: 12px;
-  font-weight: 800;
-  color: #1f2937;
-  letter-spacing: 0.16em;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .login-text-link {
-  border: 1px solid #dbe4f0;
+  border: 1px solid var(--border);
   background: #ffffff;
-  color: #2563eb;
-  font-size: 12px;
-  font-weight: 700;
-  min-height: 34px;
-  padding: 7px 12px;
-  border-radius: 999px;
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  min-height: 30px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
 .login-text-link:hover {
@@ -429,28 +474,28 @@ input, button, select, textarea { font: inherit; }
 .login-card button {
   margin-top: 4px;
   border: 1px solid transparent;
-  background: #2563eb;
+  background: var(--accent);
   color: #fff;
-  border-radius: 12px;
-  min-height: 46px;
-  padding: 12px 18px;
-  font-size: 14px;
-  font-weight: 800;
+  border-radius: var(--radius-md);
+  min-height: 44px;
+  padding: 11px 18px;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
   letter-spacing: 0.01em;
   text-transform: none;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.13);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.16);
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, background 0.18s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .login-card button:hover:not(:disabled) {
   background: #1d4ed8;
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
 }
 
 .login-card button:disabled {
@@ -517,8 +562,8 @@ input, button, select, textarea { font: inherit; }
 
 /* System logo image in login brand bar */
 .login-brand-logo-img {
-  height: 300px;
-  max-width: 500px;
+  max-height: 80px;
+  max-width: 220px;
   width: auto;
   object-fit: contain;
   display: block;

@@ -162,15 +162,15 @@ router.patch("/attendance/:id/break-start", allowRoles("super-admin", "owner", "
 router.patch("/attendance/:id/break-end", allowRoles("super-admin", "owner", "coach"), endMemberBreak);
 router.post("/attendance/import", allowRoles("super-admin", "owner"), upload.single("file"), importAttendanceExcel);
 
-router.post("/coach-attendance/clock-in", allowRoles("coach"), clockInCoachAttendance);
-router.patch("/coach-attendance/:id/clock-out", allowRoles("coach"), clockOutCoachAttendance);
-router.post("/coach-attendance/:id/break-start", allowRoles("coach"), startCoachBreak);
-router.patch("/coach-attendance/:id/break-end", allowRoles("coach"), endCoachBreak);
-router.get("/coach-attendance/my", allowRoles("coach"), getMyCoachAttendance);
-router.get("/coach-attendance/today", allowRoles("coach"), getTodayCoachAttendance);
+router.post("/coach-attendance/clock-in", allowRoles("coach", "staff"), clockInCoachAttendance);
+router.patch("/coach-attendance/:id/clock-out", allowRoles("coach", "staff"), clockOutCoachAttendance);
+router.post("/coach-attendance/:id/break-start", allowRoles("coach", "staff"), startCoachBreak);
+router.patch("/coach-attendance/:id/break-end", allowRoles("coach", "staff"), endCoachBreak);
+router.get("/coach-attendance/my", allowRoles("coach", "staff"), getMyCoachAttendance);
+router.get("/coach-attendance/today", allowRoles("coach", "staff"), getTodayCoachAttendance);
 
-router.get("/salary-advances/my", allowRoles("coach"), getMyAdvances);
-router.get("/payroll/my", allowRoles("coach"), getMyPayroll);
+router.get("/salary-advances/my", allowRoles("coach", "staff"), getMyAdvances);
+router.get("/payroll/my", allowRoles("coach", "staff"), getMyPayroll);
 
 router.post("/plans", allowRoles("super-admin", "owner"), createMembershipPlan);
 router.patch("/plans/:id", allowRoles("super-admin", "owner"), updateMembershipPlan);
@@ -229,7 +229,7 @@ router.post("/coach-leaves", allowRoles("super-admin", "owner"), validate(create
 router.patch("/coach-leaves/:id", allowRoles("super-admin", "owner"), updateCoachLeave);
 router.delete("/coach-leaves/:id", allowRoles("super-admin", "owner"), deleteCoachLeave);
 // Coach-side leave routes
-router.get("/coach-leaves/my", allowRoles("coach"), getMyCoachLeaves);
-router.post("/coach-leaves/request", allowRoles("coach"), validate(requestCoachLeaveSchema), requestCoachLeave);
+router.get("/coach-leaves/my", allowRoles("coach", "staff"), getMyCoachLeaves);
+router.post("/coach-leaves/request", allowRoles("coach", "staff"), validate(requestCoachLeaveSchema), requestCoachLeave);
 
 module.exports = router;
