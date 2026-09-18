@@ -466,26 +466,38 @@ function SupplementImageField({ file, onChange, currentImageUrl = "" }) {
   );
 }
 
-function InfoTile({ label, value, tone = "#2563eb", soft = "#eff6ff" }) {
+function InfoTile({ label, value, tone = "#2563eb" }) {
   return (
-    <div style={{ padding: "14px 16px", borderRadius: 16, background: soft, border: `1px solid ${tone}20` }}>
-      <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
+    <div style={{
+      padding: "12px 14px",
+      borderRadius: "var(--radius-md)",
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      borderLeft: `3px solid ${tone}`,
+      boxShadow: "var(--shadow-sm)"
+    }}>
+      <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "var(--fw-medium)", marginBottom: 4 }}>
         {label}
       </div>
-      <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", lineHeight: 1.4 }}>{value}</div>
+      <div style={{ fontSize: "var(--fs-md)", fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1.3 }}>{value}</div>
     </div>
   );
 }
 
-function ProfileMetric({ label, value, tone = "#2563eb", soft = "#eff6ff" }) {
+function ProfileMetric({ label, value, tone = "#2563eb" }) {
   return (
-    <div style={{ padding: "12px 14px", borderRadius: 16, background: soft, border: `1px solid ${tone}20` }}>
-      <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
+    <div style={{
+      padding: "12px 14px",
+      borderRadius: "var(--radius-md)",
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      borderLeft: `3px solid ${tone}`,
+      boxShadow: "var(--shadow-sm)"
+    }}>
+      <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "var(--fw-medium)", marginBottom: 4 }}>
         {label}
       </div>
-      <div style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", lineHeight: 1.2 }}>
-        {value}
-      </div>
+      <div style={{ fontSize: "var(--fs-md)", fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1.3 }}>{value}</div>
     </div>
   );
 }
@@ -1457,9 +1469,27 @@ function PaginationControls({ page, totalPages, onPageChange, totalItems, label 
 function MacroPill({ label, value, tone = "#2563eb" }) {
   const isMobile = useIsMobile(640);
   return (
-    <div style={{ padding: isMobile ? "9px 10px" : "10px 12px", borderRadius: 14, background: `${tone}12`, border: `1px solid ${tone}22`, minWidth: isMobile ? 0 : 82, width: isMobile ? "100%" : "auto" }}>
-      <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)" }}>{label}</div>
-      <div style={{ marginTop: 4, fontSize: isMobile ? 14 : 15, fontWeight: 800, color: tone, lineHeight: 1.2 }}>{value}</div>
+    <div style={{
+      padding: isMobile ? "8px 12px" : "10px 14px",
+      borderRadius: "var(--radius-md)",
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      boxShadow: "var(--shadow-sm)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 4,
+      minWidth: isMobile ? 0 : 96,
+      width: isMobile ? "100%" : "auto"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <span style={{ width: 6, height: 6, borderRadius: "var(--radius-full)", background: tone, flexShrink: 0 }} />
+        <span style={{ fontSize: "var(--fs-xs)", fontWeight: "var(--fw-medium)", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
+          {label}
+        </span>
+      </div>
+      <div style={{ fontSize: "var(--fs-md)", fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1.2 }}>
+        {value}
+      </div>
     </div>
   );
 }
@@ -4445,6 +4475,7 @@ function GymOwnerDash() {
     editEquipment,
     addMembershipPlan,
     editMembershipPlan,
+    removeMembershipPlan,
     addExpense,
     editExpense,
     addSupplement,
@@ -5352,6 +5383,17 @@ function GymOwnerDash() {
 
     setPlanModal(null);
     setPlanForm(emptyPlanForm);
+  }
+
+  async function handleDeletePlan(plan) {
+    if (!plan) return;
+    const ok = window.confirm(`Are you sure you want to delete the plan "${plan.name}"?`);
+    if (!ok) return;
+    try {
+      await removeMembershipPlan(plan.id || plan._id);
+    } catch (err) {
+      alert(err.message || "Failed to delete plan");
+    }
   }
 
   async function saveEquipment() {
@@ -7195,30 +7237,34 @@ function GymOwnerDash() {
                       const totalSubscribers = members.length || 1;
                       const durationLabel = plan.durationMonths === 1 ? "Monthly" : plan.durationMonths === 3 ? "Quarterly" : plan.durationMonths === 12 ? "Annual" : `${plan.durationMonths} Months`;
                       return (
-                        <div key={plan.id} style={{ borderRadius: 18, overflow: "hidden", border: `1.5px solid ${plan.color}30`, boxShadow: `0 4px 24px ${plan.color}14`, position: "relative", background: "#fff", display: "flex", flexDirection: "column" }}>
+                        <div key={plan.id} style={{ borderRadius: 18, overflow: "hidden", border: `1.5px solid ${plan.color}30`, boxShadow: `0 4px 24px ${plan.color}14`, position: "relative", background: "var(--surface)", display: "flex", flexDirection: "column" }}>
                           {/* Top badge strip */}
                           {(isPopular || isBestValue) && (
-                            <div style={{ background: plan.color, color: "#fff", textAlign: "center", padding: "5px 0", fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                            <div style={{ background: plan.color, color: "#fff", textAlign: "center", padding: "5px 0", fontSize: "var(--fs-xs)", fontWeight: "var(--fw-semibold)", letterSpacing: "0.05em", textTransform: "uppercase" }}>
                               {isPopular ? "★ Most Popular" : "✦ Best Value"}
                             </div>
                           )}
 
                           {/* Header */}
-                          <div style={{ background: `linear-gradient(145deg, ${plan.color}16 0%, ${plan.color}06 100%)`, padding: "22px 24px 18px", borderBottom: `1px solid ${plan.color}18` }}>
-                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 999, background: `${plan.color}20`, color: plan.color, fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.07em" }}>
+                          <div style={{ background: `linear-gradient(145deg, ${plan.color}14 0%, #ffffff 100%)`, padding: "20px 22px 18px", borderBottom: "1px solid var(--border)" }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 10px", borderRadius: "var(--radius-full)", background: `${plan.color}18`, color: plan.color, fontSize: "var(--fs-xs)", fontWeight: "var(--fw-semibold)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                                 {durationLabel}
                               </div>
-                              <IconBtn title="Edit Plan" onClick={() => openPlanModal("edit", plan)}><IcoEdit /></IconBtn>
+                              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                <IconBtn title="Edit Plan" onClick={() => openPlanModal("edit", plan)}><IcoEdit /></IconBtn>
+                                <IconBtn title="Delete Plan" danger onClick={() => handleDeletePlan(plan)}><IcoTrash /></IconBtn>
+                              </div>
                             </div>
-                            <div style={{ marginTop: 14, fontSize: 20, fontWeight: 800, color: "#0f172a", letterSpacing: "-0.02em" }}>{plan.name}</div>
-                            <div style={{ marginTop: 10, display: "flex", alignItems: "flex-end", gap: 8 }}>
-                              <span style={{ fontSize: 38, fontWeight: 900, color: plan.color, letterSpacing: "-0.04em", lineHeight: 1 }}>LKR {plan.price.toLocaleString()}</span>
+                            <div style={{ marginTop: 12, fontSize: "var(--fs-lg)", fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{plan.name}</div>
+                            <div style={{ marginTop: 8, display: "flex", alignItems: "baseline", gap: 6 }}>
+                              <span style={{ fontSize: "var(--fs-sm)", fontWeight: "var(--fw-semibold)", color: "var(--muted)" }}>LKR</span>
+                              <span style={{ fontSize: 28, fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1 }}>{plan.price.toLocaleString()}</span>
                             </div>
-                            <div style={{ marginTop: 6, display: "flex", gap: 12, flexWrap: "wrap" }}>
-                              <span style={{ fontSize: 12, color: "#64748b" }}>{plan.durationMonths} month{plan.durationMonths > 1 ? "s" : ""}</span>
-                              <span style={{ fontSize: 12, color: "#94a3b8" }}>·</span>
-                              <span style={{ fontSize: 12, color: "#64748b" }}>LKR {pricePerDay.toLocaleString()} / day</span>
+                            <div style={{ marginTop: 6, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+                              <span style={{ fontSize: "var(--fs-xs)", color: "var(--muted)" }}>{plan.durationMonths} month{plan.durationMonths > 1 ? "s" : ""}</span>
+                              <span style={{ fontSize: "var(--fs-xs)", color: "var(--muted-light)" }}>·</span>
+                              <span style={{ fontSize: "var(--fs-xs)", color: "var(--muted)" }}>LKR {pricePerDay.toLocaleString()} / day</span>
                             </div>
                           </div>
 
@@ -7238,13 +7284,13 @@ function GymOwnerDash() {
                           {/* Stats bar */}
                           <div style={{ padding: "14px 24px", borderTop: `1px solid ${plan.color}14`, background: `${plan.color}06` }}>
                             <div style={{ display: "flex", gap: 0 }}>
-                              <div style={{ flex: 1, textAlign: "center", paddingRight: 16, borderRight: "1px solid #e2e8f0" }}>
-                                <div style={{ fontSize: 22, fontWeight: 900, color: "#0f172a" }}>{subscribers}</div>
-                                <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 2 }}>Subscribers</div>
+                              <div style={{ flex: 1, textAlign: "center", paddingRight: 16, borderRight: "1px solid var(--border)" }}>
+                                <div style={{ fontSize: 20, fontWeight: "var(--fw-bold)", color: "var(--text)" }}>{subscribers}</div>
+                                <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", marginTop: 2 }}>Subscribers</div>
                               </div>
                               <div style={{ flex: 1, textAlign: "center", paddingLeft: 16 }}>
-                                <div style={{ fontSize: 15, fontWeight: 800, color: "#16a34a" }}>LKR {collected.toLocaleString()}</div>
-                                <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 2 }}>Collected</div>
+                                <div style={{ fontSize: "var(--fs-sm)", fontWeight: "var(--fw-semibold)", color: "#16a34a" }}>LKR {collected.toLocaleString()}</div>
+                                <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", marginTop: 2 }}>Collected</div>
                               </div>
                             </div>
                             {members.length > 0 && (

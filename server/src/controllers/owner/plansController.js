@@ -65,6 +65,16 @@ async function updateMembershipPlan(req, res) {
   return res.json({ message: "Membership plan updated" });
 }
 
+async function deleteMembershipPlan(req, res) {
+  const plan = await findOwnedDocument(MembershipPlan, req, req.params.id);
+  if (plan === "forbidden") return res.status(403).json({ message: "You do not have access to this membership plan" });
+  if (!plan) return res.status(404).json({ message: "Membership plan not found" });
+
+  await MembershipPlan.findByIdAndDelete(plan._id);
+  return res.json({ message: "Membership plan deleted successfully" });
+}
+
+
 async function createWorkoutPlan(req, res) {
   const { gymId, name, level, duration, days, category, description, exercises } = req.body || {};
 
@@ -400,7 +410,7 @@ async function deleteAnnouncement(req, res) {
 }
 
 module.exports = {
-  createMembershipPlan, updateMembershipPlan,
+  createMembershipPlan, updateMembershipPlan, deleteMembershipPlan,
   createWorkoutPlan, updateWorkoutPlan, deleteWorkoutPlan,
   assignWorkoutPlanToMember, removeWorkoutPlanFromMember,
   createMealPlan, updateMealPlan, deleteMealPlan,

@@ -218,13 +218,22 @@ export function SupplementImageField({ file, onChange, currentImageUrl = "" }) {
   );
 }
 
-export function InfoTile({ label, value, tone = "#2563eb", soft = "#eff6ff" }) {
+export function InfoTile({ label, value, tone = "#2563eb" }) {
   return (
-    <div style={{ padding: "14px 16px", borderRadius: 16, background: soft, border: `1px solid ${tone}20` }}>
-      <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
+    <div style={{
+      padding: "12px 14px",
+      borderRadius: "var(--radius-md)",
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      borderLeft: `3px solid ${tone}`,
+      boxShadow: "var(--shadow-sm)"
+    }}>
+      <div style={{ fontSize: "var(--fs-xs)", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: "var(--fw-medium)", marginBottom: 4 }}>
         {label}
       </div>
-      <div style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", lineHeight: 1.4 }}>{value}</div>
+      <div style={{ fontSize: "var(--fs-md)", fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1.3 }}>
+        {value}
+      </div>
     </div>
   );
 }

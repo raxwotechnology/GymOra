@@ -11,7 +11,7 @@ const {
 } = require("./attendanceController");
 const { serviceEquipment, createEquipment, updateEquipment, reportBreakage, resolveBreakage } = require("./equipmentController");
 const {
-  createMembershipPlan, updateMembershipPlan,
+  createMembershipPlan, updateMembershipPlan, deleteMembershipPlan,
   createWorkoutPlan, updateWorkoutPlan, deleteWorkoutPlan,
   assignWorkoutPlanToMember, removeWorkoutPlanFromMember,
   createMealPlan, updateMealPlan, deleteMealPlan,
@@ -49,7 +49,7 @@ module.exports = {
   getMyCoachAttendance, getTodayCoachAttendance,
   listAttendance, listCoachAttendance, markCoachAttendance, startMemberBreak, endMemberBreak,
   serviceEquipment, createEquipment, updateEquipment, reportBreakage, resolveBreakage,
-  createMembershipPlan, updateMembershipPlan,
+  createMembershipPlan, updateMembershipPlan, deleteMembershipPlan,
   createWorkoutPlan, updateWorkoutPlan, deleteWorkoutPlan,
   assignWorkoutPlanToMember, removeWorkoutPlanFromMember,
   createMealPlan, updateMealPlan, deleteMealPlan,

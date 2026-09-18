@@ -29,6 +29,7 @@ const {
   resolveBreakage,
   createMembershipPlan,
   updateMembershipPlan,
+  deleteMembershipPlan,
   createWorkoutPlan,
   updateWorkoutPlan,
   deleteWorkoutPlan,
@@ -174,6 +175,7 @@ router.get("/payroll/my", allowRoles("coach", "staff"), getMyPayroll);
 
 router.post("/plans", allowRoles("super-admin", "owner"), createMembershipPlan);
 router.patch("/plans/:id", allowRoles("super-admin", "owner"), updateMembershipPlan);
+router.delete("/plans/:id", allowRoles("super-admin", "owner"), deleteMembershipPlan);
 router.post("/equipment", allowRoles("super-admin", "owner"), createEquipment);
 router.patch("/equipment/:id", allowRoles("super-admin", "owner"), updateEquipment);
 router.patch("/equipment/:id/service", allowRoles("super-admin", "owner"), serviceEquipment);

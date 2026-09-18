@@ -8,6 +8,10 @@ export function updateMembershipPlan(id, payload) {
   return apiFetch(`/api/owner/plans/${id}`, { method: "PATCH", body: JSON.stringify(payload) });
 }
 
+export function deleteMembershipPlan(id) {
+  return apiFetch(`/api/owner/plans/${id}`, { method: "DELETE" });
+}
+
 export function createWorkoutPlan(payload) {
   return apiFetch("/api/owner/workout-plans", { method: "POST", body: JSON.stringify(payload) });
 }

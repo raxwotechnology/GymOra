@@ -6,9 +6,27 @@ import { useIsMobile } from "../lib/hooks";
 export function MacroPill({ label, value, tone = "#2563eb" }) {
   const isMobile = useIsMobile(640);
   return (
-    <div style={{ padding: isMobile ? "9px 10px" : "10px 12px", borderRadius: 14, background: `${tone}12`, border: `1px solid ${tone}22`, minWidth: isMobile ? 0 : 82, width: isMobile ? "100%" : "auto" }}>
-      <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)" }}>{label}</div>
-      <div style={{ marginTop: 4, fontSize: isMobile ? 14 : 15, fontWeight: 800, color: tone, lineHeight: 1.2 }}>{value}</div>
+    <div style={{
+      padding: isMobile ? "8px 12px" : "10px 14px",
+      borderRadius: "var(--radius-md)",
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
+      boxShadow: "var(--shadow-sm)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 4,
+      minWidth: isMobile ? 0 : 96,
+      width: isMobile ? "100%" : "auto"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <span style={{ width: 6, height: 6, borderRadius: "var(--radius-full)", background: tone, flexShrink: 0 }} />
+        <span style={{ fontSize: "var(--fs-xs)", fontWeight: "var(--fw-medium)", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
+          {label}
+        </span>
+      </div>
+      <div style={{ fontSize: "var(--fs-md)", fontWeight: "var(--fw-bold)", color: "var(--text)", lineHeight: 1.2 }}>
+        {value}
+      </div>
     </div>
   );
 }
